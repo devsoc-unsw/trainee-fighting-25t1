@@ -1,4 +1,4 @@
-import { getData, setData } from './voteSessionData';
+import { getData, setData } from './dataStore';
 import { dataStore, question, voteSession } from './interface';
 // this function should create the voting session and add it to the dataStore
 export const hostCreateVoteSession = (  
@@ -30,7 +30,7 @@ export const hostCreateVoteSession = (
     hostZid,
   };
 
-  data?.voteSessions.push(newVoteSession);
+  data.voteSessions.push(newVoteSession);
   setData(data);
   // idk if i should return the ID of the new voting session
 }

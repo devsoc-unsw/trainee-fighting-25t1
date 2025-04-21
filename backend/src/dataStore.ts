@@ -13,14 +13,14 @@ let data: dataStore = {
  * @description This function retrieves the data from the data store file.
  * It checks if the file exists, reads its content, and parses it into a JavaScript object.
  */
-const getData = (): dataStore | undefined => {
+const getData = (): dataStore => {
   const filePath ="./dataStore.json";
   if (fs.existsSync(filePath)) {
     const voteSessionDataBuffer = fs.readFileSync(filePath);
     const jsonString = String(voteSessionDataBuffer);
     const data: dataStore = JSON.parse(jsonString);
-    return data;
   }
+  return data;
 }
 
 /**
