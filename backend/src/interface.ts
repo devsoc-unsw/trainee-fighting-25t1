@@ -5,6 +5,7 @@ export interface dataStore {
 }
 
 export interface voteSession {
+  hostToken: string;
   id: number;
   title: string;
   description: string;
@@ -12,7 +13,6 @@ export interface voteSession {
   endDate: string;
   status: string;
   questions: question[];
-  hostZid: number;
 }
 
 export interface question {
