@@ -8,7 +8,7 @@ import crypto from 'crypto';
 
 // TODO: change the type of session store, using any is bad practice.
 let sessionStore: SessionStore = { sessions: [] };
-let database: DataStore = { users: [], elections: [] };
+let database: DataStore = { users: [], elections: [], electionSessions: [] };
 
 const SESSION_PATH = "./src/data/sessions.json";
 const DATA_PATH = "./src/data/database.json";
@@ -120,7 +120,7 @@ export function setData(newData: DataStore) {
 // clears the entire database, as well as clears out all existing sessions.
 export function clear() {
   // Reset both memory and files
-  setData({ users: [], elections: [] });
+  setData({ users: [], elections: [], electionSessions: [] });
   setSessions([]);
 
   return {};

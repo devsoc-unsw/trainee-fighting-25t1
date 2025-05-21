@@ -8,10 +8,10 @@ async function beforeEveryTest() {
   // clear();
 }
 
-describe('POST /createVoteSession', () => {
+describe('POST /createElection', () => {
   beforeEach(async() => await beforeEveryTest());
 
-  it('Should create a vote session successfully', async () => {
+  it('Should create an election successfully', async () => {
     const mockUserId = 'test-user-123';
 
     console.log("Mock user ID: " + mockUserId);
@@ -21,7 +21,7 @@ describe('POST /createVoteSession', () => {
     console.log("mock session id: " + sessionId);
 
     const res = await request(app)
-      .post('/api/auth/createVoteSession')
+      .post('/api/auth/createElection')
       .set('x-session-id', sessionId)
       .send({
         title: "Test Election",

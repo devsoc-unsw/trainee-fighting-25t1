@@ -10,6 +10,7 @@ interface Image {
 }
 
 interface Election {
+    id: number
     authUserId: string, // the owner of the election
     name: string,
     description: string,
@@ -17,7 +18,9 @@ interface Election {
     // Optional | Remote
     location?: string,
     requires_zid: boolean,
-    questions: Question[]
+    questions: Question[],
+    startTime: Date;
+    endTime: Date,
 } 
 
 export interface ElectionSession {
@@ -83,7 +86,8 @@ export interface Session {
 
 export interface DataStore {
     users: User[],
-    elections: ElectionSession[],
+    elections: Election[],
+    electionSessions: ElectionSession[]
 }
 
 export interface SessionStore {

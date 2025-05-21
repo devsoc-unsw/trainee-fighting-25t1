@@ -141,11 +141,11 @@ export function authLogout(sessionId: string): { error?: string; status?: number
  * @param endDate
  * @param zid_requirement
  * @param locationOfVote
- * @returns 
+ * @returns
  */
 
 
-interface authCreateVoteSessionProps {
+interface authcreateElectionProps {
   userSessionId: string,
   title: string,
   description: string,
@@ -156,7 +156,7 @@ interface authCreateVoteSessionProps {
   locationOfVote?: string,
 }
 
-export const authCreateVoteSession = (props: authCreateVoteSessionProps) : number => {
+export const authCreateElection = (props: authcreateElectionProps) : number => {
   const db = getData();
   const sessions = getSessions();
 
@@ -191,6 +191,7 @@ export const authCreateVoteSession = (props: authCreateVoteSessionProps) : numbe
   const questions: Question[] = [];
 
   const newElection: Election = {
+    id: db.elections.length + 1, // temporary
     authUserId: userId, // changed authUserZid to authUserId bc again we store hashed zids not raw zids
     name: props.title,
     description: props.description,
@@ -198,18 +199,23 @@ export const authCreateVoteSession = (props: authCreateVoteSessionProps) : numbe
     location: props.locationOfVote,
     requires_zid: props.zid_requirement,
     questions,
-  };
-
-  const newElectionSession: ElectionSession = {
-    metadata: newElection,
-    sessionId: db.elections.length + 1,
     startTime: props.startDate,
     endTime: props.endDate,
-    participants: [],
-  }
+  };
 
-  db.elections.push(newElectionSession);
+  db.elections.push(newElection);
   setData(db);
 
-  return newElectionSession.sessionId;
+  return newElection.id;
+}
+
+/**
+ * User adds opening positions.
+ * @param electionId 
+ * @param roleTitle
+ * @returns 
+ */
+
+interface authAddPosition {
+
 }

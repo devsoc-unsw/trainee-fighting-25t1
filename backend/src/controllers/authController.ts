@@ -71,7 +71,7 @@ export const logout = (req: Request, res: Response) => {
   return; 
 };
 
-export const createVoteSession = async (req: Request, res: Response, next: NextFunction) => {
+export const createElection = async (req: Request, res: Response, next: NextFunction) => {
   const userSessionId = req.headers['x-session-id'] as string;
   const {
     title,
@@ -89,7 +89,7 @@ export const createVoteSession = async (req: Request, res: Response, next: NextF
   }
 
   try {
-    const result = await authService.authCreateVoteSession(
+    const result = await authService.authCreateElection(
       {
         userSessionId,
         title, 
