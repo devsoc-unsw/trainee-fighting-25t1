@@ -2,10 +2,14 @@ import request from 'supertest';
 import app from '../app';
 import { clear, createAndStoreSession } from '../data/dataStore';
 
+
+async function beforeEveryTest() {
+  await new Promise(res => setTimeout(res, 1000));
+  // clear();
+}
+
 describe('POST /createVoteSession', () => {
-  beforeEach(() => {
-    clear();
-  });
+  beforeEach(async() => await beforeEveryTest());
 
   it('Should create a vote session successfully', async () => {
     const mockUserId = 'test-user-123';
@@ -30,8 +34,6 @@ describe('POST /createVoteSession', () => {
       });
     
     console.log("received status: " + res.statusCode);
-
-
 
     expect(res.statusCode).toEqual(200);
     expect(res.body.result).toBeDefined();

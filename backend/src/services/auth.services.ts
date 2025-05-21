@@ -3,7 +3,6 @@ import {
   setData,
   getSessions,
   setSessions,
-  generateSessionId,
   getHashOf,
   createAndStoreSession,
 } from '../data/dataStore';
@@ -167,6 +166,8 @@ export const authCreateVoteSession = (props: authCreateVoteSessionProps) : numbe
     throw new Error('Failed to load data store');
   }
 
+  console.log("received database: " + JSON.stringify(db));
+
   // find userId:
   const session = sessions.find((session) => session.sessionId === props.userSessionId);
   
@@ -204,6 +205,8 @@ export const authCreateVoteSession = (props: authCreateVoteSessionProps) : numbe
 
   db.elections.push(newElection);
   setData(db);
+
+  console.log("database after election: " + JSON.stringify(getData()));
 
   return newElection.id;
 }
