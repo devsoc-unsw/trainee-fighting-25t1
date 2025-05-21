@@ -10,18 +10,23 @@ interface Image {
 }
 
 interface Election {
-    id: number,
     authUserId: string, // the owner of the election
     name: string,
     description: string,
     images: string[]
     // Optional | Remote
     location?: string,
-    date_time_start: Date,
-    date_time_end: Date,
     requires_zid: boolean,
     questions: Question[]
 } 
+
+export interface ElectionSession {
+    metadata: Election,
+    sessionId: number,
+    startTime: Date;
+    endTime: Date,
+    participants: string[]
+}
 
 enum QuestionType {
     SelectOne,
@@ -74,11 +79,11 @@ export interface Session {
     sessionId: string; // this is the JWT
     userId: string;
     createdAt: Date;
-}  
+}
 
 export interface DataStore {
     users: User[],
-    elections: Election[],
+    elections: ElectionSession[],
 }
 
 export interface SessionStore {

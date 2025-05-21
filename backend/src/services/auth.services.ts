@@ -8,7 +8,7 @@ import {
 } from '../data/dataStore';
 import { StatusCodes } from 'http-status-codes';
 import { decryptData } from '../../../shared/src/encryptionBackend';
-import { Question, Election, Session, User } from '../../../shared/interfaces';
+import { Question, Election, Session, User, ElectionSession } from '../../../shared/interfaces';
 ////////////// Util function(s) //////////////
 /**
  * Uses the CSESoc zId + zPass verification API endpoint, returns the user's name on success 
@@ -191,22 +191,25 @@ export const authCreateVoteSession = (props: authCreateVoteSessionProps) : numbe
   const questions: Question[] = [];
 
   const newElection: Election = {
-    id: db.elections.length + 1, // subject to change
     authUserId: userId, // changed authUserZid to authUserId bc again we store hashed zids not raw zids
     name: props.title,
     description: props.description,
     images: props.images,
     location: props.locationOfVote,
-    date_time_start: props.startDate,
-    date_time_end: props.endDate,
     requires_zid: props.zid_requirement,
     questions,
   };
 
-  db.elections.push(newElection);
+  const newElectionSession: ElectionSession = {
+    metadata: newElection,
+    sessionId: db.elections.length + 1,
+    startTime: props.startDate,
+    endTime: props.endDate,
+    participants: [],
+  }
+
+  db.elections.push(newElectionSession);
   setData(db);
 
-  console.log("database after election: " + JSON.stringify(getData()));
-
-  return newElection.id;
+  return newElectionSession.sessionId;
 }
