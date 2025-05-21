@@ -1,4 +1,18 @@
 {
   "users": [],
-  "elections": []
+  "elections": [
+    {
+      "id": 1,
+      "authUserId": "test-user-123",
+      "name": "Test Election",
+      "description": "This is a test election",
+      "images": [],
+      "location": "library",
+      "date_time_start": "2025-05-21T11:56:59.022Z",
+      "date_time_end": "2025-05-21T11:56:59.022Z",
+      "requires_zid": false,
+      "questions": []
+    }
+  ],
+  "electionSessions": []
 }

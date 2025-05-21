@@ -21,7 +21,15 @@ interface Election {
     date_time_end: Date,
     requires_zid: boolean,
     questions: Question[]
-} 
+}
+
+interface ElectionSession {
+    sessionId: Number,
+    metadata: Election,
+    startTime: Date,
+    endTime: Date,
+    participants: string[]
+}
 
 enum QuestionType {
     SelectOne,
@@ -79,6 +87,7 @@ export interface Session {
 export interface DataStore {
     users: User[],
     elections: Election[],
+    electionSessions: ElectionSession[]
 }
 
 export interface SessionStore {

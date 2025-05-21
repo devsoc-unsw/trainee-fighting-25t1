@@ -1,4 +1,5 @@
-import { clear, getData, getHashOf, getSessions, verifySessionId } from "../data/dataStore";
+import { clear, getData, getSessions } from "src/data/dataStore";
+import {getHashOf, verifySessionId } from "src/data/dataUtil"
 import request from 'sync-request';
 import config from "../config/config";
 import { encryptWithPublicKey } from "../../../shared/src/encryptionBackend";

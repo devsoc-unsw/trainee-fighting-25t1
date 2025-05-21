@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as voteCreateService from '../services/voteCreate.services';
 
-export const createVoteSession = async (
+export const createElection = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -23,7 +23,7 @@ export const createVoteSession = async (
   }
 
   try {
-    const result = await voteCreateService.authCreateVoteSession({
+    const result = await voteCreateService.CreateElection({
       userSessionId,
       title,
       description,

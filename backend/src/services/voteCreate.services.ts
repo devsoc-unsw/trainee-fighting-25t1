@@ -18,7 +18,7 @@ import { Question, Election, Session, User } from '../../../shared/interfaces';
  * @returns new election ID
  */
 
-interface authCreateVoteSessionProps {
+interface CreateElectionProps {
   userSessionId: string;
   title: string;
   description: string;
@@ -29,8 +29,8 @@ interface authCreateVoteSessionProps {
   locationOfVote?: string;
 }
 
-export const authCreateVoteSession = (
-  props: authCreateVoteSessionProps
+export const CreateElection = (
+  props: CreateElectionProps
 ): number => {
   const db = getData();
   const sessions = getSessions();
@@ -81,6 +81,23 @@ export const authCreateVoteSession = (
 
   return newElection.id;
 };
+
+/**
+ * User creates a vote session.
+ * @param electionId 
+ * @param roleTitle 
+ * @returns new election ID
+ */
+interface addPositionProps {
+  electionId: number,
+  roleTitle: string
+}
+const addPostion = (props: addPositionProps): void => {
+  const db = getData();
+
+  const election = db.elections.filter(e => props.electionId == e.id);
+}
+
 
 // functionality for creating voting sessions is already done
 // gonna add the functionality for:

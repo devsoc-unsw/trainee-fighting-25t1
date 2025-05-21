@@ -1,3 +1,9 @@
 {
-  "sessions": []
+  "sessions": [
+    {
+      "sessionId": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZXN0LXVzZXItMTIzIiwiaWF0IjoxNzQ3ODI4NjE5fQ.JEy3FXdD6tlHn12HhNWSMn4KccxFCbroXX77iWJZ5K4",
+      "userId": "test-user-123",
+      "createdAt": "2025-05-21T11:56:59.021Z"
+    }
+  ]
 }

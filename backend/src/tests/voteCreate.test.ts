@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from '../app';
 import { clear, createAndStoreSession } from '../data/dataStore';
 
-describe('POST /createVoteSession', () => {
+describe('POST /createElection', () => {
   beforeEach(() => {
     clear();
   });
@@ -17,7 +17,7 @@ describe('POST /createVoteSession', () => {
     console.log("mock session id: " + sessionId);
 
     const res = await request(app)
-      .post('/api/auth/createVoteSession')
+      .post('/api/auth/createElection')
       .set('x-session-id', sessionId)
       .send({
         title: "Test Election",
