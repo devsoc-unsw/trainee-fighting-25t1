@@ -208,14 +208,3 @@ export const authCreateElection = (props: authcreateElectionProps) : number => {
 
   return newElection.id;
 }
-
-/**
- * User adds opening positions.
- * @param electionId 
- * @param roleTitle
- * @returns 
- */
-
-interface authAddPosition {
-
-}
