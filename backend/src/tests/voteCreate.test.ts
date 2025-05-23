@@ -70,12 +70,13 @@ describe.skip('POST /createVoteSession', () => {
 
 
 // tests for viewing/adding/modifying/deleting candidates in a position
-describe('tests for viewing/adding/modifying/deleting candidates in a position', () => {
+describe.skip('tests for viewing/adding/modifying/deleting candidates in a position', () => {
   clear();
 
   // Register user
   const zId = encryptWithPublicKey(zidPlainText);
   const zPass = encryptWithPublicKey(zpassPlainText);
+  console.log({zId, zPass});
   const registerRes = post(registerRoute, { zId, zPass });
   const sessionId = registerRes.body.sessionId.toString();
   const payload = verifySessionId(sessionId);

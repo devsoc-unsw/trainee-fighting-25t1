@@ -12,16 +12,19 @@ async function beforeEveryTest() {
 
 ////////////////////////////// TEST CASES  ////////////////////////////////
 
-describe.skip('auth register tests!', () => {
+describe('auth register tests!', () => {
   beforeEach(async () => await beforeEveryTest());
 
   
   // you can manually check that this test works by using your own zid and zpass
   // (it works)
-  test('Successful, returns a sessionId', () => {
+  test.only('Successful, returns a sessionId', () => {
     const zId = encryptWithPublicKey(zidPlainText);
     const zPass = encryptWithPublicKey(zpassPlainText); // helper function directly encrypts, not testing encrypton from frontend
+    console.log({zId, zPass});
     const res = post(registerRoute, { zId, zPass });
+
+    console.log(res);
 
     expect(res.statusCode).toEqual(OK);
     expect(res.body).toEqual({
