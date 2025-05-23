@@ -5,7 +5,7 @@ import {
   setSessions,
   createAndStoreSession,
 } from '../data/dataStore';
-import { getHashOf, generateUserId } from '../data/dataUtil';
+import { getHashOf, } from '../data/dataUtil';
 import { StatusCodes } from 'http-status-codes';
 import { decryptData } from '../../../shared/src/encryptionBackend';
 import { Position, Election, Session, User } from '../../../shared/interfaces';

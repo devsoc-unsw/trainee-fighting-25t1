@@ -51,13 +51,16 @@ interface VoteAnswer {
     answerIndex: number | number[],
 }
 
+// NOTE: 
 interface Candidate {
     zId?: number;
     fullName: string;
     description: string;
     image: string;
-    votes: number;
+    votes: number[]; // an array of preferential votes; votes[0] is the number of first preference votes
+    candidateIndex: number,
 }
+
 export {
     Voter,
     // Location,
