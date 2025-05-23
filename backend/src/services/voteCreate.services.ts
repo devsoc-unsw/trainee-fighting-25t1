@@ -72,7 +72,7 @@ export const CreateElection = (
   const questions: Position[] = [];
 
   const newElection: Election = {
-    id: uuidv4(), // subject to change
+    id: uuidv4(),
       OwnerId: userId,
     name: props.title,
     description: props.description,
@@ -199,8 +199,8 @@ export const addPostion = (props: addPositionProps): Object => {
 
 interface createCandidateProps {
   authuserId: string,
-  voteId: number,
-  positionId: number,
+  electionId: string,
+  positionId: string,
   name: string,
 };
 
@@ -213,7 +213,7 @@ export function createCandidate(candidateData: createCandidateProps): any {
   if ('error' in userCheck) return userCheck;
 
   const electionCheck = validateElectionId(
-    candidateData.voteId,
+    candidateData.electionId,
     candidateData.authuserId
   );
   if ('error' in electionCheck) return electionCheck;
@@ -244,8 +244,8 @@ export function createCandidate(candidateData: createCandidateProps): any {
 
 interface editCandidateProps {
   authuserId: string;
-  voteId: number;
-  positionId: number;
+  electionId: string;
+  positionId: string;
   candidateIndex: number;
   name: string;
   description: string;
@@ -257,7 +257,7 @@ export function editCandidate(candidateData: editCandidateProps): any {
   if ('error' in userCheck) return userCheck;
 
   const electionCheck = validateElectionId(
-    candidateData.voteId,
+    candidateData.electionId,
     candidateData.authuserId
   );
   if ('error' in electionCheck) return electionCheck;
@@ -272,7 +272,7 @@ export function editCandidate(candidateData: editCandidateProps): any {
   const { position } = positionCheck;
   
   const candidate = position.candidates.find(
-    c => c.candidateIndex === candidateData.candidateIndex
+    (c: Candidate )=> c.candidateIndex === candidateData.candidateIndex
   );
   
 
@@ -290,8 +290,8 @@ export function editCandidate(candidateData: editCandidateProps): any {
 
 interface deleteCandidateProps {
   authuserId: string;
-  voteId: number;
-  positionId: number;
+  electionId: string;
+  positionId: string;
   candidateIndex: number;
 }
 
@@ -301,7 +301,7 @@ export function deleteCandidate(candidateData: deleteCandidateProps): any {
   if ('error' in userCheck) return userCheck;
   console.log('1');
   const electionCheck = validateElectionId(
-    candidateData.voteId,
+    candidateData.electionId,
     candidateData.authuserId
   );
   if ('error' in electionCheck) return electionCheck;
@@ -317,7 +317,7 @@ export function deleteCandidate(candidateData: deleteCandidateProps): any {
   const { position } = positionCheck;
 
   const foundIndex = position.candidates.findIndex(
-    c => c.candidateIndex === candidateData.candidateIndex
+    (c : Candidate) => c.candidateIndex === candidateData.candidateIndex
   );
   
   if (foundIndex === -1) {
@@ -335,8 +335,8 @@ export function deleteCandidate(candidateData: deleteCandidateProps): any {
 
 interface viewCandidateProps {
   authuserId: string;
-  voteId: number;
-  positionId: number;
+  electionId: string;
+  positionId: string;
 }
 
 export function viewCandidates(positionData: viewCandidateProps): any {
@@ -345,7 +345,7 @@ export function viewCandidates(positionData: viewCandidateProps): any {
   if ('error' in userCheck) return userCheck;
 
   const electionCheck = validateElectionId(
-    positionData.voteId,
+    positionData.electionId,
     positionData.authuserId
   );
   if ('error' in electionCheck) return electionCheck;
@@ -362,8 +362,8 @@ export function viewCandidates(positionData: viewCandidateProps): any {
 
 interface deleteAllCandidatesprops {
   authuserId: string;
-  voteId: number;
-  positionId: number;
+  electionId: string;
+  positionId: string;
 }
 
 // util function, to be removed later?
@@ -372,7 +372,7 @@ export function deleteAllCandidates(positionData: deleteAllCandidatesprops) {
   if ('error' in userCheck) return userCheck;
 
   const electionCheck = validateElectionId(
-    positionData.voteId,
+    positionData.electionId,
     positionData.authuserId
   );
   if ('error' in electionCheck) return electionCheck;

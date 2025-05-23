@@ -30,7 +30,7 @@ User session from a prevoius test, or Create a session by calling the user API a
 // we should actually use the API route:
 //    router.post('/login', login);
 // to register a user and create a session token
-describe.skip('POST /createVoteSession', () => {
+describe('POST /createVoteSession', () => {
   beforeEach(() => {
     clear();
   });
@@ -77,6 +77,7 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
   const zId = encryptWithPublicKey(zidPlainText);
   const zPass = encryptWithPublicKey(zpassPlainText);
   const registerRes = post(registerRoute, { zId, zPass });
+  console.log("THIS THE SESSION ID: " + registerRes.body.sessionId);
   const sessionId = registerRes.body.sessionId.toString();
   const payload = verifySessionId(sessionId);
   const authUserId = payload?.userId;
@@ -95,14 +96,14 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
     },
     { 'x-session-id': sessionId }
   );
-  const voteId = createVoteRes.body.result;
+  const electionId = createVoteRes.body.result;
 
   // Create position
   const createPositionRes = post(
     createPositionRoute,
     {
       authuserId: authUserId,
-      voteId,
+      electionId,
       title: "President",
       questionType: "single",
     },
@@ -117,7 +118,7 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
       createCandidateRoute,
       {
         authuserId: authUserId,
-        voteId,
+        electionId,
         positionId,
         name: "Jane Doe"
       },
@@ -127,7 +128,7 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
 
     // 2. View Candidates (after creation)
     const viewRes1 = get(
-      getViewCandidatesRoute(voteId, positionId),
+      getViewCandidatesRoute(electionId, positionId),
       {
         authuserId: authUserId,
       },
@@ -145,7 +146,7 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
       editCandidateRoute,
       {
         authuserId: authUserId,
-        voteId,
+        electionId,
         positionId,
         candidateIndex,
         name: "Jane Smith",
@@ -158,7 +159,7 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
 
     // 4. View Candidates (after edit)
     const viewRes2 = get(
-      getViewCandidatesRoute(voteId, positionId),
+      getViewCandidatesRoute(electionId, positionId),
       {
         authuserId: authUserId,
       },
@@ -172,7 +173,7 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
 
     // 5. Delete Candidate
     const deleteRes = del(
-      getDeleteCandidateRoute(voteId, positionId, candidateIndex),
+      getDeleteCandidateRoute(electionId, positionId, candidateIndex),
       {
         authuserId: authUserId,
       },
@@ -183,7 +184,7 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
 
     // 6. View Candidates (after deletion)
     const viewRes3 = get(
-      getViewCandidatesRoute(voteId, positionId),
+      getViewCandidatesRoute(electionId, positionId),
       {
         authuserId: authUserId,
       },

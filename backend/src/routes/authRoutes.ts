@@ -16,8 +16,8 @@ router.post('/addPosition', addPosition);
 // Routes for candidates
 router.post('/createCandidate', createCandidate);
 router.post('/editCandidate', editCandidate);
-router.get('/votes/:voteId/positions/:positionId/candidates', viewCandidates);
-router.delete('/votes/:voteId/positions/:positionId/candidates/:candidateIndex', deleteCandidate);
+router.get('/votes/:electionId/positions/:positionId/candidates', viewCandidates);
+router.delete('/votes/:electionId/positions/:positionId/candidates/:candidateIndex', deleteCandidate);
 
 
 export default router;

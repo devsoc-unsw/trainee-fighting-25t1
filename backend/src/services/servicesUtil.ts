@@ -1,5 +1,5 @@
 import { getData } from "../data/dataStore";
-import { User, Election, Candidate, Question } from "../../../shared/interfaces";
+import { User, Election, Candidate, Position } from "../../../shared/interfaces";
 import { StatusCodes } from 'http-status-codes';
 
 // util file for helper functions
@@ -16,17 +16,17 @@ export function validateUserId(authuserId: string) {
 }
 
 export function validateElectionId(
-  voteId: number,
+  ElectionId: string,
   authuserId: string
 ) {
   const db = getData();
-  const election = db.elections.find(e => e.id === voteId);
+  const election = db.elections.find(e => e.id === ElectionId);
 
   if (!election) {
     return { error: 'Election not found', status: StatusCodes.NOT_FOUND };
   }
 
-  if (election.authUserId !== authuserId) {
+  if (election.OwnerId !== authuserId) {
     return { error: 'You do not own this election', status: StatusCodes.FORBIDDEN };
   }
 
@@ -36,8 +36,8 @@ export function validateElectionId(
 
 export function validatePositionId(
   election: Election,
-  positionId: number
-): { position: Question } | { error: string; status: number } {
+  positionId: string
+): { position: Position } | { error: string; status: number } {
   const position = election.questions.find(q => q.id === positionId);
 
   if (!position) {

@@ -125,7 +125,7 @@ export const createCandidate = async (
   const userSessionId = req.headers['x-session-id'] as string;
   const {
     authuserId,
-    voteId,
+    electionId,
     positionId,
     name,
   } = req.body;
@@ -138,7 +138,7 @@ export const createCandidate = async (
   try {
     const result = await voteCreateService.createCandidate({
       authuserId,
-      voteId,
+      electionId,
       positionId,
       name
     });
@@ -158,7 +158,7 @@ export const editCandidate = async (
   const userSessionId = req.headers['x-session-id'] as string;
   const {
     authuserId,
-    voteId,
+    electionId,
     positionId,
     candidateIndex,
     name,
@@ -174,7 +174,7 @@ export const editCandidate = async (
   try {
     const result = await voteCreateService.editCandidate({
       authuserId,
-      voteId,
+      electionId,
       positionId,
       candidateIndex,
       name,
@@ -196,8 +196,8 @@ export const deleteCandidate = async (
 ) => {
   const userSessionId = req.headers['x-session-id'] as string;
   const authuserId = req.query.authuserId as string;
-  const voteId = Number(req.params.voteId);
-  const positionId = Number(req.params.positionId);
+  const electionId = req.params.electionId;
+  const positionId = req.params.positionId;
   const candidateIndex = Number(req.params.candidateIndex);
 
   if (!userSessionId) {
@@ -208,7 +208,7 @@ export const deleteCandidate = async (
   try {
     const result = await voteCreateService.deleteCandidate({
       authuserId,
-      voteId,
+      electionId,
       positionId,
       candidateIndex,
     });
@@ -227,8 +227,8 @@ export const viewCandidates = async (
 ) => {
   const userSessionId = req.headers['x-session-id'] as string;
   const authuserId = req.query.authuserId as string;
-  const voteId = Number(req.params.voteId);
-  const positionId = Number(req.params.positionId);  
+  const electionId = req.params.electionId;
+  const positionId = req.params.positionId;
 
   if (!userSessionId) {
     res.status(400).json({ error: 'Missing user session ID' });
@@ -238,7 +238,7 @@ export const viewCandidates = async (
   try {
     const result = await voteCreateService.viewCandidates({
       authuserId,
-      voteId,
+      electionId,
       positionId,
     });
 

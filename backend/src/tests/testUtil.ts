@@ -18,12 +18,12 @@ export const createPositionRoute = '/api/auth/createPosition';
 export const createCandidateRoute = '/api/auth/createCandidate';
 export const editCandidateRoute = '/api/auth/editCandidate';
 
-export function getViewCandidatesRoute(voteId: number, positionId: number) {
-  return `/api/auth/votes/${voteId}/positions/${positionId}/candidates`;
+export function getViewCandidatesRoute(electionId: string, positionId: string) {
+  return `/api/auth/votes/${electionId}/positions/${positionId}/candidates`;
 }
 
-export function getDeleteCandidateRoute(voteId: number, positionId: number, candidateIndex: number) {
-  return `/api/auth/votes/${voteId}/positions/${positionId}/candidates/${candidateIndex}`;
+export function getDeleteCandidateRoute(electionId: string, positionId: string, candidateIndex: number) {
+  return `/api/auth/votes/${electionId}/positions/${positionId}/candidates/${candidateIndex}`;
 }
 
 ////////////////////////////// STATUS CODES  //////////////////////////
@@ -39,10 +39,10 @@ export const UNAUTHORISED = 401;
 
 export function resetTestVotePosition(
   authuserId: string,
-  voteId: number,
-  positionId: number
+  electionId: string,
+  positionId: string
 ) {
-  return deleteAllCandidates({ authuserId, voteId, positionId });
+  return deleteAllCandidates({ authuserId, electionId, positionId });
 }
 
 export function post(
