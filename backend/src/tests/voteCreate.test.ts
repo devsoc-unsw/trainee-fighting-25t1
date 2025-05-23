@@ -77,7 +77,6 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
   const zId = encryptWithPublicKey(zidPlainText);
   const zPass = encryptWithPublicKey(zpassPlainText);
   const registerRes = post(registerRoute, { zId, zPass });
-  console.log("THIS THE SESSION ID: " + registerRes.body.sessionId);
   const sessionId = registerRes.body.sessionId.toString();
   const payload = verifySessionId(sessionId);
   const authUserId = payload?.userId;
