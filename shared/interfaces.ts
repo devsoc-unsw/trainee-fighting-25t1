@@ -10,8 +10,8 @@ interface Image {
 }
 
 interface Election {
-    id: number,
-    authUserId: string, // the owner of the election
+    id: string,
+    OwnerId: string, // the owner of the election
     name: string,
     description: string,
     images: string[]
@@ -20,11 +20,11 @@ interface Election {
     date_time_start: Date,
     date_time_end: Date,
     requires_zid: boolean,
-    questions: Question[]
+    questions: Position[]
 }
 
 interface ElectionSession {
-    sessionId: Number,
+    sessionId: string,
     metadata: Election,
     startTime: Date,
     endTime: Date,
@@ -36,14 +36,13 @@ enum QuestionType {
     Preferential,
 }
 
-interface Question {
+interface Position {
     //Title e.g. Treasurer
-    id: number;
+    id: string;
     title: string
     candidates: Candidate[],
     vote_answers: VoteAnswer[],
     questionType: QuestionType,
-    QuestionType: QuestionType
 }
 
 // Change this to use ZK Proof 
@@ -64,7 +63,7 @@ export {
     // Location,
     Image,
     Election,
-    Question,
+    Position,
     QuestionType,
     VoteAnswer,
     Candidate,

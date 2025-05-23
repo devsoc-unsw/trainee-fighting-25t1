@@ -40,6 +40,30 @@ export const createElection = async (
   }
 };
 
+export const addPosition = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const userSessionId = req.headers['x-session-id'] as string;
+
+  const {
+    electionId,
+    roleTitle,
+  } = req.body;
+
+  if (!userSessionId) {
+    res.status(400).json({ error: 'Missing user session ID' });
+    return;
+  }
+
+  const result = await voteCreateService.addPostion({
+    userSessionId,
+    electionId,
+    roleTitle
+  })
+}
+
 // gonna add the functionality for:
 // - viewing voting sessions, corresponding to the "Create Vote - View Voting Sessions"  page
 // - viewing positions in a vote, corresponding to the "Create Vote - Add Positions"  page

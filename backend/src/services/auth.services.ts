@@ -8,7 +8,7 @@ import {
 import { getHashOf, generateUserId } from '../data/dataUtil';
 import { StatusCodes } from 'http-status-codes';
 import { decryptData } from '../../../shared/src/encryptionBackend';
-import { Question, Election, Session, User } from '../../../shared/interfaces';
+import { Position, Election, Session, User } from '../../../shared/interfaces';
 ////////////// Util function(s) //////////////
 /**
  * Uses the CSESoc zId + zPass verification API endpoint, returns the user's name on success 

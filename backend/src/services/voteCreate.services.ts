@@ -1,9 +1,10 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
   getData,
   setData,
   getSessions,
 } from '../data/dataStore';
-import { Question, Election, Session, User } from '../../../shared/interfaces';
+import { Position, Election, Session, User, Candidate, VoteAnswer, QuestionType } from '../../../shared/interfaces';
 
 /**
  * User creates a vote session.
@@ -31,7 +32,7 @@ interface CreateElectionProps {
 
 export const CreateElection = (
   props: CreateElectionProps
-): number => {
+): string => {
   const db = getData();
   const sessions = getSessions();
 
@@ -61,11 +62,11 @@ export const CreateElection = (
     throw new Error('Title cannot be empty');
   }
 
-  const questions: Question[] = [];
+  const questions: Position[] = [];
 
   const newElection: Election = {
-    id: db.elections.length + 1, // subject to change
-    authUserId: userId,
+    id: uuidv4(), // subject to change
+      OwnerId: userId,
     name: props.title,
     description: props.description,
     images: props.images,
@@ -89,13 +90,47 @@ export const CreateElection = (
  * @returns new election ID
  */
 interface addPositionProps {
-  electionId: number,
+  userSessionId: string,
+  electionId: string,
   roleTitle: string
 }
-const addPostion = (props: addPositionProps): void => {
-  const db = getData();
 
-  const election = db.elections.filter(e => props.electionId == e.id);
+export const addPostion = (props: addPositionProps): void => {
+  const db = getData();
+  const sessions = getSessions();
+  const session = sessions.find(
+    (session) => session.sessionId === props.userSessionId
+  );
+  console.log('creating session');
+
+  const election = db.elections.find(e => props.electionId == e.id);
+
+  // check 1. if election exist
+  if (election == undefined) {
+    throw new Error('Election does not exist');
+  }
+
+  // check 2. if user exist
+  if (!session) throw new Error('Invalid session ID');
+
+
+  // check 3. if user is owner of election
+  if (election.OwnerId !== session.userId) {
+    throw new Error('User does not have access');
+  }
+
+  const candidates: Candidate[] = [];
+  const voteAnswers: VoteAnswer[] = [];
+
+  const newPostion: Position = {
+    id: uuidv4(),
+    title: props.roleTitle,
+    candidates: candidates,
+    vote_answers: voteAnswers,
+    questionType:  QuestionType.SelectOne,
+  }
+
+  election.questions.push(newPostion);
 }
 
 
