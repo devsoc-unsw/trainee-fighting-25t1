@@ -7,7 +7,7 @@ import {
   get,
   del,
   registerRoute,
-  createPositionRoute,
+  addPositionRoute,
   createVoteRoute,
   createCandidateRoute,
   editCandidateRoute,
@@ -17,6 +17,7 @@ import {
   zpassPlainText
 } from './testUtil';
 import { encryptWithPublicKey } from '../../../shared/src/encryptionBackend';
+import { QuestionType } from '../../../shared/interfaces';
 
 
 // TODO: implement Brandan's feedback for this test:
@@ -66,10 +67,9 @@ describe('POST /createVoteSession', () => {
   });
 });
 
-// tests for creating positions
+// // tests for creating positions
 
-
-// tests for viewing/adding/modifying/deleting candidates in a position
+// // tests for viewing/adding/modifying/deleting candidates in a position
 describe('tests for viewing/adding/modifying/deleting candidates in a position', () => {
   clear();
 
@@ -98,8 +98,8 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
   const electionId = createVoteRes.body.result;
 
   // Create position
-  const createPositionRes = post(
-    createPositionRoute,
+  const addPositionRes = post(
+    addPositionRoute,
     {
       authuserId: authUserId,
       electionId,
@@ -108,7 +108,7 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
     },
     { 'x-session-id': sessionId }
   );
-  const positionId = createPositionRes.body.result.positionId;
+  const positionId = addPositionRes.body.result.positionId;
 
   it('Should create, view, edit, and delete a candidate successfully', () => {
     console.log("the authUserid is... " + authUserId);
@@ -194,3 +194,4 @@ describe('tests for viewing/adding/modifying/deleting candidates in a position',
     expect(viewRes3.body.result).toHaveLength(0);
   });
 });
+

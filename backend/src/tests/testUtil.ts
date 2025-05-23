@@ -14,7 +14,7 @@ export const registerRoute = '/api/auth/register';
 export const loginRoute = '/api/auth/login';
 export const logoutRoute = '/api/auth/logout';
 export const createVoteRoute = '/api/auth/createVoteSession';
-export const createPositionRoute = '/api/auth/createPosition';
+export const addPositionRoute = '/api/auth/addPosition';
 export const createCandidateRoute = '/api/auth/createCandidate';
 export const editCandidateRoute = '/api/auth/editCandidate';
 
