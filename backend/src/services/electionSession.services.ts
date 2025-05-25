@@ -74,7 +74,7 @@ export const deleteVoter = (electionId: number, sessionCode: string, userSession
  * side effects: update sessionIsLive flag to false
  */
 export const endElection = async (electionId: string): Promise<void> => {
-    await getElectionData(electionDatabase => {
+    await getElectionData( electionDatabase => {
         const election = electionDatabase.get(electionId);
         if (!election) {
             throw new Error("invalid election id");
@@ -95,6 +95,5 @@ export const endElection = async (electionId: string): Promise<void> => {
  * return hashmap: 
  *  key: question, value: winner (string)
  */
-export const getResult = (electionId: number) => {
-    
+export const getResult = async (electionId: string) => {
 }
