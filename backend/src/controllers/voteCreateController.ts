@@ -306,3 +306,23 @@ export const activateElection = async (
     next(e);
   }
 };
+
+export const deactivateElection = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const electionId = String(req.params.electionId);
+
+  if (!electionId) {
+    res.status(400).json({ error: 'Missing election ID' });
+    return;
+  }
+
+  try {
+    await electionSessionService.endElection(electionId);
+    res.status(200).json({ message: 'Election deactivated successfully' });
+  } catch (e) {
+    next(e);
+  }
+}

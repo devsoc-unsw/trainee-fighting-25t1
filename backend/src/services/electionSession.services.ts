@@ -73,8 +73,17 @@ export const deleteVoter = (electionId: number, sessionCode: string, userSession
  * checks if election session is live
  * side effects: update sessionIsLive flag to false
  */
-export const endElection = (electionId: number): boolean => {
-    return true;
+export const endElection = async (electionId: string): Promise<void> => {
+    await getElectionData(electionDatabase => {
+        const election = electionDatabase.get(electionId);
+        if (!election) {
+            throw new Error("invalid election id");
+        }
+
+        election.isActive = false;
+    });
+
+    await saveElectionDatabaseToFile();
 }
 
 /**
