@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import { ... } from '../../src/controllers/voterController.ts';
+import { submitUserVote } from 'src/controllers/voterController';
 const router = Router();
 
+router.post('/submitVote/:electionId', submitUserVote);
 
 
 export default router;

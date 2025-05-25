@@ -68,15 +68,71 @@ describe('POST /createElection', () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body.electionId).toBeDefined();
 
-    const electionId = res.body.electionId
+    const voteId = res.body.electionId
+
+    // console.log(electionId)
+    
+    let positionId;
+    // Create position
+    const createPositionRes = await request(app)
+      .post(createPositionRoute)
+      .set('x-session-id', sessionId)
+      .send({
+        voteId,
+        title: "President",
+        questionType: QuestionType.Preferential
+      });
+
+    expect(createPositionRes.statusCode).toBe(200);
+    positionId = createPositionRes.body.result.positionId;
+    console.log(positionId);
+
+    const createCandidateRes = await request(app)
+        .post(createCandidateRoute)
+        .set('x-session-id', sessionId)
+        .send({
+        voteId,
+        positionId,
+        name: "d"
+        });
+
+    expect(createCandidateRes.statusCode).toBe(200);
+
+    await request(app)
+        .post(createCandidateRoute)
+        .set('x-session-id', sessionId)
+        .send({
+        voteId,
+        positionId,
+        name: "a"
+        });
+
+    await request(app)
+        .post(createCandidateRoute)
+        .set('x-session-id', sessionId)
+        .send({
+        voteId,
+        positionId,
+        name: "b"
+        });
+
+    await request(app)
+        .post(createCandidateRoute)
+        .set('x-session-id', sessionId)
+        .send({
+        voteId,
+        positionId,
+        name: "c"
+        });
+
     const res1 = await request(app)
-      .post(`/api/elections/activateSession/${electionId}`);
+      .post(`/api/elections/activateSession/${voteId}`);
 
     expect(res1.statusCode).toEqual(200);
     expect(res1.body.sessionCode).toBeDefined();
 
     const res2 = await request(app)
-    .post(`/api/elections/deactivateElection/${electionId}`);
+    .post(`/api/elections/deactivateElection/${voteId}`);
 
     expect(res2.statusCode).toEqual(200);
   });

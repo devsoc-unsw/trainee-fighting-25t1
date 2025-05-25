@@ -1,0 +1,50 @@
+{
+  "846093345": {
+    "id": 846093345,
+    "authUserId": "23cb8a19b7a7246b5029df0ccbff840576e305fbae6a338353b635380b62c48e",
+    "name": "Test Election",
+    "description": "This is a test election",
+    "images": [],
+    "location": "library",
+    "date_time_start": "2025-05-25T14:20:55.407Z",
+    "date_time_end": "2025-05-25T14:20:55.407Z",
+    "requires_zid": false,
+    "questions": [
+      {
+        "id": 914401767,
+        "title": "President",
+        "candidates": [
+          {
+            "fullName": "d",
+            "description": "",
+            "image": "",
+            "candidateIndex": 299186854
+          },
+          {
+            "fullName": "a",
+            "description": "",
+            "image": "",
+            "candidateIndex": 742204881
+          },
+          {
+            "fullName": "b",
+            "description": "",
+            "image": "",
+            "candidateIndex": 450044734
+          },
+          {
+            "fullName": "c",
+            "description": "",
+            "image": "",
+            "candidateIndex": 690062404
+          }
+        ],
+        "questionType": 1,
+        "ballot": []
+      }
+    ],
+    "isActive": true,
+    "voters": [],
+    "sessionCode": "ic4ax"
+  }
+}
