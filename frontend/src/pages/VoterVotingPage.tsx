@@ -7,7 +7,7 @@ import SmallButton from "../components/buttons/SmallButton";
 import { deleteElement, reorderElements } from "../helpers";
 import CandidatePane from "../components/buttons/CandidatePane";
 import ThinGradientButton from "../components/buttons/ThinGradientButton";
-import { Question } from "../../../shared/interfaces";
+import {Question } from "../../../shared/interfaces";
 
 export default function VoterVotingPage() {
 const { id} = useParams();
@@ -104,8 +104,30 @@ const positions:Question[] = data.result.positions;
         newCandidates[positionIndex] = originalCandidates[positionIndex]
         setCandidates(originalCandidates);
     }
-
     const handleConfirm = () => {
+       const preferences = new Array(originalCandidates[positionIndex].candidates.length);
+        originalCandidates[positionIndex].candidates.forEach((orig, originalIndex) => {
+                preferences[originalIndex] = candidates[positionIndex].candidates.findIndex(candidateName => candidateName === orig);;
+             //  console.log(orig)
+        });
+        const userSessionId = localStorage.getItem('user-session-id');
+        const API_URL = import.meta.env.VITE_BACKEND_URL;
+        const preferencesWrapper = {preferences}
+        console.log("HELLO WORD PAGE");
+        console.log(preferences)
+        fetch(`${API_URL}/api/voters/vote`, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              method: 'POST',
+              body: JSON.stringify(
+                {
+                userSessionId: userSessionId,
+                sessionCode: id,
+                positionId: JSON.stringify(positionIndex),
+                preferences: preferences
+                }),
+            });
         if (positionIndex < candidates.length - 1) {
             navigate(`/voter/voting/${id.trim()}/${positionIndex+1}`);
         } else {

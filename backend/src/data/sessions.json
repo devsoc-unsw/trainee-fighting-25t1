@@ -1,14 +1,3 @@
 {
-  "sessions": [
-    {
-      "sessionId": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhOTk2MmIyZWRjNTZmYzZhNWRjNGYzOWZiYjFmNzI3NmVhMGE5Njg4ZWMzYzg0MDMyMmUwNjljOGRmMTEyOGI5IiwiaWF0IjoxNzQ4MjE0Mzc1fQ.r9GwhLNT6rVRCl604ucsXl0coDClsOJyC2g9jcY3baw",
-      "userId": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
-      "createdAt": "2025-05-25T23:06:15.400Z"
-    },
-    {
-      "sessionId": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNDFkNGVlZDU3Yzc5MWQzNmUwMmNkZDJiYjgyOTFjZWY0MDk4MmRjN2Q3ODE1Mjc3MmVlMGMwMDEwNzFlNDk4IiwiaWF0IjoxNzQ4MjE3NTczfQ.XUG9VtxkA68TbxtDrZ5TwoEwaQaVER9iuYgGY_SURK8",
-      "userId": "e41d4eed57c791d36e02cdd2bb8291cef40982dc7d78152772ee0c001071e498",
-      "createdAt": "2025-05-25T23:59:33.201Z"
-    }
-  ]
+  "sessions": []
 }
