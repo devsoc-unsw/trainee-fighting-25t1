@@ -63,7 +63,7 @@ export default function CreateVoteEditCandidate() {
             </div>
 
             <div className="flex justify-center mt-6">
-              <ThinGradientButton text="Save" margin="mt-2" onClick={goBack} w={'w-25'} />
+              <ThinGradientButton text="Save" margin="mt-2" onClick={goBack} w={'w-25'} disabled={false}/>
             </div>
           </form>
         </div>

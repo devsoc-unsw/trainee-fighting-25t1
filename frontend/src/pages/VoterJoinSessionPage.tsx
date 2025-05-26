@@ -75,7 +75,7 @@ export default function VoterJoinSessionPage() { // once voter has logged in
       <div className="flex flex-col justify-center w-[30em] h-[12em] bg-linear-140 from-transparent to-white/40 mb-60 border-2 border-[#f1e9e9] rounded-4xl">
         <div className="flex flex-row justify-center">
           <AuthInput type="text" label="Join a Voting Session" placeholder="Input Session ID here" marginStyle="" setInput={setInput} w="w-[16em]" h="h-[2.5em]" />
-          <ThinGradientButton text={"Join"} margin={"mt-9 ml-5"} w={"w-20"} onClick={onClick} />
+          <ThinGradientButton text={"Join"} margin={"mt-9 ml-5"} w={"w-20"} onClick={onClick} disabled={false} />
         </div>
       </div>
     </StyledBackground >

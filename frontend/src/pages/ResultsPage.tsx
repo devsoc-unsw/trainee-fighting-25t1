@@ -3,7 +3,7 @@ import StyledBackground from "../components/background/StyledBackground";
 import Heading from "../components/buttons/Heading";
 import WinnerPane from "../components/buttons/WinnerPane";
 import { useEffect, useRef, useState } from "react";
-import { Election, Question, QuestionType } from "../../../shared/interfaces";
+import { Election, Question} from "../../../shared/interfaces";
 
 export default function ResultsPage() {
 
@@ -78,7 +78,7 @@ function calculatePreferentialWinner(question: Question): Results {
         .join(', ');
     
     // Start IRV algorithm
-    let activeCandidateIndices = new Set<number>();
+    const activeCandidateIndices = new Set<number>();
     for (let i = 0; i < candidates.length; i++) {
         activeCandidateIndices.add(i);
     }
@@ -159,106 +159,106 @@ function calculatePreferentialWinner(question: Question): Results {
 
     function CalculateVoteResults(input_election: Election) {
 
-        const example_questions: Question[] = [
-            {
-                "id": 504483359,
-                "title": "asdf",
-                "candidates": [
-                    {
-                        "name": "asdf",
-                        "description": "",
-                        "image": "",
-                        "candidateIndex": 579342419
-                    },
-                    {
-                        "name": "asdf",
-                        "description": "",
-                        "image": "",
-                        "candidateIndex": 464391844
-                    },
-                    {
-                        "name": "asdfasdfasdf",
-                        "description": "",
-                        "image": "",
-                        "candidateIndex": 957946584
-                    },
-                    {
-                        "name": "asdfadsfasdfa",
-                        "description": "",
-                        "image": "",
-                        "candidateIndex": 23380445
-                    }
-                ],
-                questionType: 0,
-                "ballot": [
-                    {
-                        userid: "a",
-                        preferences: [0, 1, 2, 3]
-                    },
-                    {
-                        userid: "b",
-                        preferences: [0, 3, 2, 1]
-                    },
-                    {
-                        userid: "c",
-                        preferences: [2, 1, 3, 1]      
-                    }
-                ]
-            },
-                        {
-                "id": 504483359,
-                "title": "asdf",
-                "candidates": [
-                    {
-                        "name": "Cheese Man",
-                        "description": "",
-                        "image": "",
-                        "candidateIndex": 579342419
-                    },
-                    {
-                        "name": "Dog Boy",
-                        "description": "",
-                        "image": "",
-                        "candidateIndex": 464391844
-                    },
-                    {
-                        "name": "Hurler",
-                        "description": "",
-                        "image": "",
-                        "candidateIndex": 957946584
-                    },
-                    {
-                        "name": "Demon",
-                        "description": "",
-                        "image": "",
-                        "candidateIndex": 23380445
-                    }
-                ],
-                questionType: 0,
-                "ballot": [
-                    {
-                        userid: "a",
-                        preferences: [3, 2, 1, 0]
-                    },
-                    {
-                        userid: "b",
-                        preferences: [3, 4, 2, 1]
-                    },
-                    {
-                        userid: "c",
-                        preferences: [0, 1, 2, 3]      
-                    }
-                ]
-            }
+        // const example_questions: Question[] = [
+        //     {
+        //         "id": 504483359,
+        //         "title": "asdf",
+        //         "candidates": [
+        //             {
+        //                 "name": "asdf",
+        //                 "description": "",
+        //                 "image": "",
+        //                 "candidateIndex": 579342419
+        //             },
+        //             {
+        //                 "name": "asdf",
+        //                 "description": "",
+        //                 "image": "",
+        //                 "candidateIndex": 464391844
+        //             },
+        //             {
+        //                 "name": "asdfasdfasdf",
+        //                 "description": "",
+        //                 "image": "",
+        //                 "candidateIndex": 957946584
+        //             },
+        //             {
+        //                 "name": "asdfadsfasdfa",
+        //                 "description": "",
+        //                 "image": "",
+        //                 "candidateIndex": 23380445
+        //             }
+        //         ],
+        //         questionType: 0,
+        //         "ballot": [
+        //             {
+        //                 userid: "a",
+        //                 preferences: [0, 1, 2, 3]
+        //             },
+        //             {
+        //                 userid: "b",
+        //                 preferences: [0, 3, 2, 1]
+        //             },
+        //             {
+        //                 userid: "c",
+        //                 preferences: [2, 1, 3, 1]      
+        //             }
+        //         ]
+        //     },
+        //                 {
+        //         "id": 504483359,
+        //         "title": "asdf",
+        //         "candidates": [
+        //             {
+        //                 "name": "Cheese Man",
+        //                 "description": "",
+        //                 "image": "",
+        //                 "candidateIndex": 579342419
+        //             },
+        //             {
+        //                 "name": "Dog Boy",
+        //                 "description": "",
+        //                 "image": "",
+        //                 "candidateIndex": 464391844
+        //             },
+        //             {
+        //                 "name": "Hurler",
+        //                 "description": "",
+        //                 "image": "",
+        //                 "candidateIndex": 957946584
+        //             },
+        //             {
+        //                 "name": "Demon",
+        //                 "description": "",
+        //                 "image": "",
+        //                 "candidateIndex": 23380445
+        //             }
+        //         ],
+        //         questionType: 0,
+        //         "ballot": [
+        //             {
+        //                 userid: "a",
+        //                 preferences: [3, 2, 1, 0]
+        //             },
+        //             {
+        //                 userid: "b",
+        //                 preferences: [3, 4, 2, 1]
+        //             },
+        //             {
+        //                 userid: "c",
+        //                 preferences: [0, 1, 2, 3]      
+        //             }
+        //         ]
+        //     }
 
-        ]
+        // ]
 
-        let win_results: Results[] = []
+        const win_results: Results[] = []
 
         // example_questions.forEach((cur_q, index) => {
 
         input_election.questions.forEach((cur_q, index) => {
-            let res2 = calculatePreferentialWinner(cur_q);
+            const res2 = calculatePreferentialWinner(cur_q);
             
             console.log("CALC WINNER: " + index)
             console.log(res2)
@@ -304,12 +304,8 @@ function calculatePreferentialWinner(question: Question): Results {
                     // SetQuestions(find_election.questions)
                 }
                 // setVotingSessions(data.result.elections);
-            } catch (err: any) {
+            } catch (err) {
                 console.error(err);
-                window.alert(err.message || "An unknown error occurred");
-
-
-
             } finally {
                 setLoading(false);
                 setIsFetching(false);

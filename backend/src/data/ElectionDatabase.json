@@ -13,6 +13,110 @@
     "electionState": 0,
     "voters": []
   },
+  "620517214": {
+    "id": 620517214,
+    "authUserId": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
+    "name": "Hallo",
+    "description": "",
+    "images": [],
+    "location": "",
+    "date_time_start": "1970-01-01T00:00:00.000Z",
+    "date_time_end": "1970-01-01T00:00:00.000Z",
+    "requires_zid": true,
+    "questions": [
+      {
+        "id": 933506458,
+        "title": "President A",
+        "candidates": [
+          {
+            "name": "Alexia Lebrun",
+            "description": "",
+            "image": "",
+            "candidateIndex": 202946474
+          },
+          {
+            "name": "Patrick Cooper",
+            "description": "",
+            "image": "",
+            "candidateIndex": 326810774
+          },
+          {
+            "name": "Lina Pasquier",
+            "description": "",
+            "image": "",
+            "candidateIndex": 467348299
+          },
+          {
+            "name": "Timothy Stevens",
+            "description": "",
+            "image": "",
+            "candidateIndex": 938375214
+          }
+        ],
+        "questionType": "preferential",
+        "ballot": [
+          {
+            "userid": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
+            "preferences": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "id": 857790584,
+        "title": "President P",
+        "candidates": [
+          {
+            "name": "Alexia Lebrun",
+            "description": "",
+            "image": "",
+            "candidateIndex": 337052439
+          },
+          {
+            "name": "Patrick Cooper",
+            "description": "",
+            "image": "",
+            "candidateIndex": 430369441
+          },
+          {
+            "name": "Lina Pasquier",
+            "description": "",
+            "image": "",
+            "candidateIndex": 299067130
+          },
+          {
+            "name": "Timothy Stevens",
+            "description": "",
+            "image": "",
+            "candidateIndex": 72946241
+          }
+        ],
+        "questionType": "preferential",
+        "ballot": [
+          {
+            "userid": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
+            "preferences": [
+              1,
+              0,
+              2,
+              3
+            ]
+          }
+        ]
+      }
+    ],
+    "electionState": 2,
+    "voters": [
+      {
+        "zid": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9"
+      }
+    ],
+    "sessionCode": "xtg13"
+  },
   "687395784": {
     "id": 687395784,
     "authUserId": "3ff7669d4cea6175249a0d278ad406a24ac5822283274064dda909ac0995bd36",
@@ -31,6 +135,194 @@
       }
     ],
     "sessionCode": "beyc8"
+  },
+  "861914485": {
+    "id": 861914485,
+    "authUserId": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
+    "name": "Try",
+    "description": "",
+    "images": [],
+    "location": "",
+    "date_time_start": "1970-01-01T00:00:00.000Z",
+    "date_time_end": "1970-01-01T00:00:00.000Z",
+    "requires_zid": true,
+    "questions": [
+      {
+        "id": 410941174,
+        "title": "President A",
+        "candidates": [
+          {
+            "name": "Alexia Lebrun",
+            "description": "",
+            "image": "",
+            "candidateIndex": 345012547
+          },
+          {
+            "name": "Patrick Cooper",
+            "description": "",
+            "image": "",
+            "candidateIndex": 539775438
+          },
+          {
+            "name": "Lina Pasquier",
+            "description": "",
+            "image": "",
+            "candidateIndex": 665055046
+          },
+          {
+            "name": "Timothy Stevens",
+            "description": "",
+            "image": "",
+            "candidateIndex": 312896042
+          }
+        ],
+        "questionType": "preferential",
+        "ballot": [
+          {
+            "userid": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
+            "preferences": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "id": 794847185,
+        "title": "President P",
+        "candidates": [
+          {
+            "name": "Alexia Lebrun",
+            "description": "",
+            "image": "",
+            "candidateIndex": 729314494
+          },
+          {
+            "name": "Patrick Cooper",
+            "description": "",
+            "image": "",
+            "candidateIndex": 294363828
+          },
+          {
+            "name": "Lina Pasquier",
+            "description": "",
+            "image": "",
+            "candidateIndex": 982249482
+          },
+          {
+            "name": "Timothy Stevens",
+            "description": "",
+            "image": "",
+            "candidateIndex": 307825348
+          }
+        ],
+        "questionType": "preferential",
+        "ballot": [
+          {
+            "userid": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
+            "preferences": [
+              1,
+              0,
+              2,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "id": 783135480,
+        "title": "President L",
+        "candidates": [
+          {
+            "name": "Alexia Lebrun",
+            "description": "",
+            "image": "",
+            "candidateIndex": 524926254
+          },
+          {
+            "name": "Patrick Cooper",
+            "description": "",
+            "image": "",
+            "candidateIndex": 966373121
+          },
+          {
+            "name": "Lina Pasquier",
+            "description": "",
+            "image": "",
+            "candidateIndex": 961699784
+          },
+          {
+            "name": "Timothy Stevens",
+            "description": "",
+            "image": "",
+            "candidateIndex": 932031469
+          }
+        ],
+        "questionType": "preferential",
+        "ballot": [
+          {
+            "userid": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
+            "preferences": [
+              2,
+              0,
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "id": 472700234,
+        "title": "President T",
+        "candidates": [
+          {
+            "name": "Alexia Lebrun",
+            "description": "",
+            "image": "",
+            "candidateIndex": 571212354
+          },
+          {
+            "name": "Patrick Cooper",
+            "description": "",
+            "image": "",
+            "candidateIndex": 488513424
+          },
+          {
+            "name": "Lina Pasquier",
+            "description": "",
+            "image": "",
+            "candidateIndex": 266738648
+          },
+          {
+            "name": "Timothy Stevens",
+            "description": "",
+            "image": "",
+            "candidateIndex": 871985640
+          }
+        ],
+        "questionType": "preferential",
+        "ballot": [
+          {
+            "userid": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",
+            "preferences": [
+              3,
+              0,
+              1,
+              2
+            ]
+          }
+        ]
+      }
+    ],
+    "electionState": 2,
+    "voters": [
+      {
+        "zid": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9"
+      }
+    ],
+    "sessionCode": "8ov22"
   },
   "890879498": {
     "id": 890879498,
