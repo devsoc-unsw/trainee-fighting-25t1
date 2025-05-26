@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { register, login, logout, checkSession  } from '../controllers/authController';
-import {createElection, viewElections, createPosition, deletePosition, reorderPositions, viewPositions, createCandidate, editCandidate, viewCandidates, deleteCandidate } from '../controllers/voteCreateController'
+import {createElection, viewElections, createPosition, deletePosition, reorderPositions, viewPositions, createCandidate, editCandidate, viewCandidates, deleteCandidate, deleteElection } from '../controllers/voteCreateController'
 // import {} from '../controllers/voteCreateController';
 // import { createVoteSession, createPosition, createCandidate, editCandidate, deleteCandidate, viewCandidates, } from '../controllers/voteCreateController';
 
@@ -15,6 +15,7 @@ router.post('/checkSession',checkSession );
 // because this functionality is separate from auth
 router.post('/createElection', createElection);
 router.get('/viewElections', viewElections);
+router.delete('/deleteElection', deleteElection);
 
 // Routes for positions
 router.post('/createPosition', createPosition);

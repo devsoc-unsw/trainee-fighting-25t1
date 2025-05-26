@@ -70,9 +70,22 @@ export default function ViewVotingSessionsPage() {
     }
     
     
-  const handleDeletion= (vote_id_input: string) => {/* your deletion logic */};
+  const handleDeletion= async (vote_id_input: number) => {
+    const res = await fetch(`${API_URL}/api/auth/deleteElection`, {
+                headers: {
+                    'x-session-id': localStorage.getItem('user-session-id') || '',
+                    'Content-Type': 'application/json',
+                },
+            method: 'DELETE',
+            body: JSON.stringify({ electionID: JSON.stringify(vote_id_input) }),
+                });
+            if (!res.ok) throw new Error("Failed to delete voting session") ;
+            window.location.reload();
+  };
   const handleAddSession = () => navigate('/creator/create-vote');
-  const handleLogout    = () => navigate('/');
+  const handleLogout    = () => {
+    
+  }
 
   return (
     <StyledBackground className="main">
@@ -97,7 +110,7 @@ export default function ViewVotingSessionsPage() {
         <div className={`${loading ? 'opacity-50 pointer-events-none' : ''} flex flex-col gap-[1.5em] pt-0`}>
           <Heading text="Your Voting Sessions" />
 
-          {state.elections.map((session, idx) => (
+          {state.elections.map((session:Election, idx) => (
             <div onClick={() => {
               // console.log(session)
               navigate(`/creator/create-vote/${session.id}/positions`)
@@ -136,7 +149,7 @@ export default function ViewVotingSessionsPage() {
               </WideButton>
               <SmallButton
                 buttonType="bin"
-                onClick={() => handleDeletion(idx)}
+                onClick={() => handleDeletion(session.id)}
                 disabled={loading}
               />
             </div>
