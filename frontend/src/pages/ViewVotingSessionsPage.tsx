@@ -6,73 +6,73 @@ import Heading from "../components/buttons/Heading";
 import SmallButton from "../components/buttons/SmallButton";
 import WideAddButton from "../components/buttons/WideAddButton";
 import logoutIcon from "../assets/svg/logout.svg";
-import { Election, ElectionState } from "../../../shared/interfaces";
+import { Election } from "../../../shared/interfaces";
 import { useVoteCreateContext } from "../state/VoteCreateContext";
 
 export default function ViewVotingSessionsPage() {
   const navigate = useNavigate();
-
   const [loading, setLoading] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
-  // const [votingSessions, setVotingSessions] = useState<Election[]>([]);
   const debounceRef = useRef<boolean>(false);
-
   const API_URL = import.meta.env.VITE_BACKEND_URL;
+  const { state, dispatch } = useVoteCreateContext();
 
-  const {state, dispatch} = useVoteCreateContext();
- 
   useEffect(() => {
     if (!isFetching) {
-        setIsFetching(true);
-        (async () => {
+      setIsFetching(true);
+      (async () => {
         if (debounceRef.current) return;
         debounceRef.current = true;
         setTimeout(() => (debounceRef.current = false), 1000);
 
         try {
-            const res = await fetch(`${API_URL}/api/auth/viewElections`, {
-                headers: {
-                    'x-session-id': localStorage.getItem('user-session-id') || ''
-                }
-                });
-            if (!res.ok) throw new Error("Failed to fetch voting sessions");
-            const data = await res.json();
-            dispatch({type: "SET_ELECTIONS", payload: data.result.elections})
-            // setVotingSessions(data.result.elections);
-        } catch (err: any) {
-            console.error(err);
-            window.alert(err.message || "An unknown error occurred");
+          const res = await fetch(`${API_URL}/api/auth/viewElections`, {
+            headers: {
+              'x-session-id': localStorage.getItem('user-session-id') || ''
+            }
+          });
+          if (!res.ok) throw new Error("Failed to fetch voting sessions");
+          const data = await res.json();
+          dispatch({ type: "SET_ELECTIONS", payload: data.result.elections })
+        } catch (err) {
+          console.error(err);
         } finally {
-            setLoading(false);
-            setIsFetching(false);
+          setLoading(false);
+          setIsFetching(false);
         }
-        })();
+      })();
     }
-  }, []);
+  }, [API_URL, dispatch, isFetching]);
 
-  const handleStart   = (vote_id_input: string) => navigate(`/creator/voting-in-session/${vote_id_input}`);
-  const handleStop    = (vote_id_input: string) => {
-    console.log("")
-  };
-  const handleResults = (vote_id_input: string) => {
-    
-    let find_election = state.elections.find((e) => String(e.id).match(vote_id_input));
+  const handleStart = (vote_id_input: number) => navigate(`/creator/voting-in-session/${vote_id_input}`);
+  const handleResults = (vote_id_input: number) => {
+
+    const find_election = state.elections.find((e) => String(e.id).match(String(vote_id_input)));
 
     if (find_election !== undefined && find_election !== null) {
 
       if (find_election.electionState !== 2) {
         window.alert("Vote needs to be finished to view results")
       } else {
-    navigate(`/creator/results/${vote_id_input}`)};
-
-      }
-
+        navigate(`/creator/results/${vote_id_input}`)
+      };
     }
-    
-    
-  const handleDeletion= (vote_id_input: string) => {/* your deletion logic */};
+  }
+
+  const handleDeletion = async (vote_id_input: number) => {
+    const res = await fetch(`${API_URL}/api/auth/deleteElection`, {
+      headers: {
+        'x-session-id': localStorage.getItem('user-session-id') || '',
+        'Content-Type': 'application/json',
+      },
+      method: 'DELETE',
+      body: JSON.stringify({ electionID: JSON.stringify(vote_id_input) }),
+    });
+    if (!res.ok) throw new Error("Failed to delete voting session");
+    window.location.reload();
+  };
   const handleAddSession = () => navigate('/creator/create-vote');
-  const handleLogout    = () => navigate('/');
+  const handleLogout = () => navigate('/');
 
   return (
     <StyledBackground className="main">
@@ -97,18 +97,17 @@ export default function ViewVotingSessionsPage() {
         <div className={`${loading ? 'opacity-50 pointer-events-none' : ''} flex flex-col gap-[1.5em] pt-0`}>
           <Heading text="Your Voting Sessions" />
 
-          {state.elections.map((session, idx) => (
+          {state.elections.map((session: Election, idx) => (
             <div onClick={() => {
               // console.log(session)
               navigate(`/creator/create-vote/${session.id}/positions`)
             }} key={idx} className="flex items-center justify-center gap-[2vw]">
-              <WideButton text={session.name} margin="mt-[0]" disabled={loading}>
-                <div className="buttons-container" style={{zIndex: 100}}>
+              <WideButton text={session.name} margin="mt-[0]" >
+                <div className="buttons-container" style={{ zIndex: 100 }}>
                   <SmallButton
                     buttonType="start"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.stopPropagation();
-
                       handleStart(session.id);
                     }}
                     disabled={loading}
@@ -116,7 +115,7 @@ export default function ViewVotingSessionsPage() {
 
                   <SmallButton
                     buttonType="results"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       handleResults(session.id);
                     }}
@@ -125,7 +124,7 @@ export default function ViewVotingSessionsPage() {
 
                   <SmallButton
                     buttonType="bin"
-                    onClick={e => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       handleDeletion(session.id);
                     }}
@@ -134,11 +133,6 @@ export default function ViewVotingSessionsPage() {
 
                 </div>
               </WideButton>
-              <SmallButton
-                buttonType="bin"
-                onClick={() => handleDeletion(idx)}
-                disabled={loading}
-              />
             </div>
           ))}
 

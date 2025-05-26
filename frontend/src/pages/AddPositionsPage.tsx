@@ -5,7 +5,6 @@ import WideButton from "../components/buttons/WideButton";
 import Heading from "../components/buttons/Heading";
 import SmallButton from "../components/buttons/SmallButton";
 import WideAddButton from "../components/buttons/WideAddButton";
-import { deleteElement, reorderElements } from "../helpers";
 import ThinGradientButton from "../components/buttons/ThinGradientButton";
 import { useVoteCreateContext } from "../state/VoteCreateContext";
 import { Election, Question } from "../../../shared/interfaces";
@@ -118,18 +117,20 @@ export default function AddPositionsPage() {
                                 <SmallButton
                                     buttonType="up"
                                     onClick={() => handleReorder(index, 'up')}
+                                    disabled={loading}
                                 />
                                 <SmallButton
                                     buttonType="down"
                                     onClick={() => handleReorder(index, 'down')}
+                                    disabled={loading}
                                 />
                             </div>
                         </WideButton>
-                        <SmallButton buttonType="bin" onClick={() => handleDeletion(index)} />
+                        <SmallButton buttonType="bin" onClick={() => handleDeletion(index)} disabled={loading} />
                     </div>
                 ))}
-                <WideAddButton onClick={() => handleAddPositions()}></WideAddButton>
-                <ThinGradientButton text="Save" margin="mt-2 mr-22" onClick={navigateAllVotes} w={'w-25'} />
+                <WideAddButton onClick={() => handleAddPositions()} disabled={loading}></WideAddButton>
+                <ThinGradientButton text="Save" margin="mt-2 mr-22" onClick={navigateAllVotes} disabled={loading} w={'w-25'}  />
             </div>
         </StyledBackground>
     )

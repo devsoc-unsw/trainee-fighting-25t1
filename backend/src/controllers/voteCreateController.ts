@@ -72,6 +72,34 @@ export const viewElections = async (
   }
 };
 
+export const deleteElection = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const userSessionId = req.headers['x-session-id'] as string;
+  const {electionID} = req.body;
+
+  const props: voteCreateService.DeleteElectionProps= {
+    userSessionId,
+    electionID,
+  };
+
+  if (!userSessionId) {
+    res.status(400).json({ error: 'Missing user session ID' });
+    return;
+  }
+
+  console.log('myprops', props);
+
+  try {
+    const result = await voteCreateService.deleteElection(props);
+    res.status(200).json({result});
+  } catch (e) {
+    next(e);
+  }
+};
+
 export const createPosition = async (
   req: Request,
   res: Response,

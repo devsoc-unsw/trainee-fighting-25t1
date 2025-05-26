@@ -16,10 +16,11 @@ import resultsIcon from '../../assets/svg/results.svg'
 
 type SmallButtonProps = {
     buttonType: string;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    disabled: boolean;
 };
 
-export default function SmallButton({ buttonType, onClick }: SmallButtonProps) {
+export default function SmallButton({ buttonType, onClick, disabled }: SmallButtonProps) {
     let buttonIcon
     if (buttonType == 'edit') {
         buttonIcon = editIcon
@@ -38,7 +39,7 @@ export default function SmallButton({ buttonType, onClick }: SmallButtonProps) {
     }
 
     return (
-        <button className="small-button" onClick={onClick}>
+        <button className="small-button" onClick={onClick} disabled={disabled}>
             <img src={smallButton} alt="Small button" />
             <img className="small-button-icon" src={buttonIcon} />
         </button>

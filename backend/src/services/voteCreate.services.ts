@@ -104,6 +104,39 @@ export const viewElections = async (
   return { elections: userElections };
 };  
 
+export interface DeleteElectionProps {
+  userSessionId: string;
+  electionID: string;
+}
+
+/**
+ * Creates a new election and returns its unique ID.
+ */
+export const deleteElection = async (
+    props: DeleteElectionProps
+  ): Promise<{ success: true }> => {
+    const sessionValidation = await validateSessionId(props.userSessionId);
+    if ('error' in sessionValidation) {
+      throw new Error(sessionValidation.error);
+    }
+  
+    const userId = sessionValidation.userId;
+
+    await getElectionData(async (map) => {
+  for (const [key, election] of map.entries()) {
+    if (election.authUserId === userId && election.id == parseInt(props.electionID)) {
+      map.delete(key); // Remove the election from the Map
+      break; // Exit the loop once deleted
+    }
+  }
+  // If you need to persist changes, you might want to call save function here
+});
+  
+    await saveElectionDatabaseToFile();
+    return { success: true };
+  };
+
+
 // functionality for creating voting sessions is already done
 // gonna add the functionality for:
 // - viewing voting sessions, corresponding to the "Create Vote - View Voting Sessions"  page
