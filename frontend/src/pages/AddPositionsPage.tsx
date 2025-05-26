@@ -125,11 +125,12 @@ export default function AddPositionsPage() {
                                 />
                             </div>
                         </WideButton>
-                        <SmallButton buttonType="bin" onClick={() => handleDeletion(index)} />
+                        {/* <SmallButton buttonType="bin" onClick={() => handleDeletion(index)} /> */}
                     </div>
                 ))}
                 <WideAddButton onClick={() => handleAddPositions()}></WideAddButton>
-                <ThinGradientButton text="Save" margin="mt-2 mr-22" onClick={navigateAllVotes} w={'w-25'} />
+                <ThinGradientButton text="Save" margin="mt-2" onClick={navigateAllVotes} w={'w-25'} />
+                {/* <ThinGradientButton text="Save" margin="mt-2 mr-22" onClick={navigateAllVotes} w={'w-25'} /> */}
             </div>
         </StyledBackground>
     )

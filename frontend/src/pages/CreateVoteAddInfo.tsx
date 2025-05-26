@@ -395,7 +395,7 @@ export default function CreateVoteAddInfo() {
         </button>
 
         <div className="w-full max-w-3xl mx-auto px-4">
-          <div className='mb-4 flex justify-between items-center'>
+          <div className='mb-4 flex flex-col justify-between items-center'>
             <Heading text={isEditMode ? "Edit Position" : "Add a New Position"} />
             {isEditMode && (
               <button
