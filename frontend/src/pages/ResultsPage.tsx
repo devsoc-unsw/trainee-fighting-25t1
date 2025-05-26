@@ -19,7 +19,6 @@ export default function ResultsPage() {
 
 
     interface Results {
-        voteName: string,
         winners: {
             position: string,
             name: string,
@@ -27,133 +26,131 @@ export default function ResultsPage() {
         }[]
     }
 
+    const [electionName, setElectionName] = useState('');
 
 
     const [voteResults, setVoteResults] = useState<Results[] | null>(null);
 
 
 
-function calculatePreferentialWinner(question: Question): Results {
-    const { candidates, ballot: ballots, title } = question;
-    
-    // Validate and clean ballots - remove duplicates and invalid indices
-    const validBallots = ballots
-        .map(ballot => {
-            // Remove duplicates while preserving order and filter valid indices
-            const cleanPreferences: number[] = [];
-            const seen = new Set<number>();
-            
-            for (const pref of ballot.preferences) {
-                if (pref >= 0 && pref < candidates.length && !seen.has(pref)) {
-                    cleanPreferences.push(pref);
-                    seen.add(pref);
-                }
-            }
-            
-            return {
-                ...ballot,
-                preferences: cleanPreferences
-            };
-        })
-        .filter(ballot => ballot.preferences.length > 0);
-    
-    // Count first preference votes for extra info
-    const firstPreferenceCounts = new Map<number, number>();
-    for (let i = 0; i < candidates.length; i++) {
-        firstPreferenceCounts.set(i, 0);
-    }
-    
-    // Count first preferences
-    validBallots.forEach(ballot => {
-        if (ballot.preferences.length > 0) {
-            const firstChoice = ballot.preferences[0];
-            firstPreferenceCounts.set(firstChoice, firstPreferenceCounts.get(firstChoice)! + 1);
-        }
-    });
-    
-    // Create first preference summary for extra info
-    const firstPrefSummary = candidates
-        .map((candidate, index) => `${candidate.name}: ${firstPreferenceCounts.get(index) || 0}`)
-        .join(', ');
-    
-    // Start IRV algorithm
-    let activeCandidateIndices = new Set<number>();
-    for (let i = 0; i < candidates.length; i++) {
-        activeCandidateIndices.add(i);
-    }
-    
-    while (activeCandidateIndices.size > 1) {
-        // Count current votes for each active candidate
-        const voteCounts = new Map<number, number>();
-        activeCandidateIndices.forEach(candidateIndex => {
-            voteCounts.set(candidateIndex, 0);
-        });
+    function calculatePreferentialWinner(question: Question): Results {
+        const { candidates, ballot: ballots, title } = question;
         
-        // Count votes based on highest preference for active candidates
+        // Validate and clean ballots - remove duplicates and invalid indices
+        const validBallots = ballots
+            .map(ballot => {
+                // Remove duplicates while preserving order and filter valid indices
+                const cleanPreferences: number[] = [];
+                const seen = new Set<number>();
+                
+                for (const pref of ballot.preferences) {
+                    if (pref >= 0 && pref < candidates.length && !seen.has(pref)) {
+                        cleanPreferences.push(pref);
+                        seen.add(pref);
+                    }
+                }
+                
+                return {
+                    ...ballot,
+                    preferences: cleanPreferences
+                };
+            })
+            .filter(ballot => ballot.preferences.length > 0);
+        
+        // Count first preference votes for extra info
+        const firstPreferenceCounts = new Map<number, number>();
+        for (let i = 0; i < candidates.length; i++) {
+            firstPreferenceCounts.set(i, 0);
+        }
+        
+        // Count first preferences
         validBallots.forEach(ballot => {
-            for (const preference of ballot.preferences) {
-                if (activeCandidateIndices.has(preference)) {
-                    voteCounts.set(preference, voteCounts.get(preference)! + 1);
-                    break; // Found the highest preference active candidate
-                }
+            if (ballot.preferences.length > 0) {
+                const firstChoice = ballot.preferences[0];
+                firstPreferenceCounts.set(firstChoice, firstPreferenceCounts.get(firstChoice)! + 1);
             }
         });
         
-        const totalVotes = Array.from(voteCounts.values()).reduce((sum, votes) => sum + votes, 0);
+        // Create first preference summary for extra info
+        const firstPrefSummary = candidates
+            .map((candidate, index) => `${candidate.name}: ${firstPreferenceCounts.get(index) || 0}`)
+            .join(', ');
         
-        // Check if any candidate has majority (>50%)
-        const majority = Math.floor(totalVotes / 2) + 1;
-        const candidateWithMajority = Array.from(voteCounts.entries())
-            .find(([_, votes]) => votes >= majority);
-        
-        if (candidateWithMajority) {
-            // We have a winner
-            const winnerIndex = candidateWithMajority[0];
-            const winner = candidates[winnerIndex];
-            
-            return {
-                voteName: title,
-                winners: [{
-                    position: title,
-                    name: winner.name,
-                    extraInfo: `1st preferences: ${firstPrefSummary}`
-                }]
-            };
+        // Start IRV algorithm
+        let activeCandidateIndices = new Set<number>();
+        for (let i = 0; i < candidates.length; i++) {
+            activeCandidateIndices.add(i);
         }
         
-        // No majority - eliminate candidate(s) with lowest votes
-        const minVotes = Math.min(...Array.from(voteCounts.values()));
-        const candidatesToEliminate = Array.from(voteCounts.entries())
-            .filter(([_, votes]) => votes === minVotes)
-            .map(([candidateIndex]) => candidateIndex);
-        
-        // Remove eliminated candidates
-        candidatesToEliminate.forEach(candidateIndex => {
-            activeCandidateIndices.delete(candidateIndex);
-        });
-        
-        // If we're down to one candidate, they win
-        if (activeCandidateIndices.size === 1) {
-            const winnerIndex = Array.from(activeCandidateIndices)[0];
-            const winner = candidates[winnerIndex];
+        while (activeCandidateIndices.size > 1) {
+            // Count current votes for each active candidate
+            const voteCounts = new Map<number, number>();
+            activeCandidateIndices.forEach(candidateIndex => {
+                voteCounts.set(candidateIndex, 0);
+            });
             
-            return {
-                voteName: title,
-                winners: [{
-                    position: title,
-                    name: winner.name,
-                    extraInfo: `1st preferences: ${firstPrefSummary}`
-                }]
-            };
+            // Count votes based on highest preference for active candidates
+            validBallots.forEach(ballot => {
+                for (const preference of ballot.preferences) {
+                    if (activeCandidateIndices.has(preference)) {
+                        voteCounts.set(preference, voteCounts.get(preference)! + 1);
+                        break; // Found the highest preference active candidate
+                    }
+                }
+            });
+            
+            const totalVotes = Array.from(voteCounts.values()).reduce((sum, votes) => sum + votes, 0);
+            
+            // Check if any candidate has majority (>50%)
+            const majority = Math.floor(totalVotes / 2) + 1;
+            const candidateWithMajority = Array.from(voteCounts.entries())
+                .find(([_, votes]) => votes >= majority);
+            
+            if (candidateWithMajority) {
+                // We have a winner
+                const winnerIndex = candidateWithMajority[0];
+                const winner = candidates[winnerIndex];
+                
+                return {
+                    winners: [{
+                        position: title,
+                        name: winner.name,
+                        extraInfo: `1st preferences: ${firstPrefSummary}`
+                    }]
+                };
+            }
+            
+            // No majority - eliminate candidate(s) with lowest votes
+            const minVotes = Math.min(...Array.from(voteCounts.values()));
+            const candidatesToEliminate = Array.from(voteCounts.entries())
+                .filter(([_, votes]) => votes === minVotes)
+                .map(([candidateIndex]) => candidateIndex);
+            
+            // Remove eliminated candidates
+            candidatesToEliminate.forEach(candidateIndex => {
+                activeCandidateIndices.delete(candidateIndex);
+            });
+            
+            // If we're down to one candidate, they win
+            if (activeCandidateIndices.size === 1) {
+                const winnerIndex = Array.from(activeCandidateIndices)[0];
+                const winner = candidates[winnerIndex];
+                
+                return {
+                    winners: [{
+                        position: title,
+                        name: winner.name,
+                        extraInfo: `1st preferences: ${firstPrefSummary}`
+                    }]
+                };
+            }
         }
+        
+        // Fallback - should not reach here in normal circumstances
+        return {
+            winners: []
+        };
     }
-    
-    // Fallback - should not reach here in normal circumstances
-    return {
-        voteName: title,
-        winners: []
-    };
-}
 
 
     function CalculateVoteResults(input_election: Election) {
@@ -274,7 +271,6 @@ function calculatePreferentialWinner(question: Question): Results {
 
     }
 
-
     useEffect(() => {
         if (!isFetching) {
             setIsFetching(true);
@@ -298,6 +294,8 @@ function calculatePreferentialWinner(question: Question): Results {
                 if (find_election !== undefined && find_election !== null) {
                     console.log("FOUND ELECTION")
                     console.log(find_election)
+                    console.log(find_election.name)
+                    setElectionName(find_election.name);
                     CalculateVoteResults(find_election)
                     // SetQuestions(find_election.questions)
                 }
@@ -357,7 +355,7 @@ function calculatePreferentialWinner(question: Question): Results {
                 <button className="hover:cursor-pointer text-white p-4 text-2xl absolute top-2 left-4 z-10" onClick={goBack}>
                     ←
                 </button>
-                <Heading text={`${voteResults[0].voteName} Results`} />
+                <Heading text={`${electionName} Results`} />
 
                 {/* {voteResults.winners.map((winner, index) => (
                     <WinnerPane key={index} winner={winner}>
@@ -370,7 +368,9 @@ function calculatePreferentialWinner(question: Question): Results {
                         <WinnerPane key={index} winner={
                         {name: curVote.winners[0].name, 
                         position: curVote.winners[0].position,
-                        extraInfo: curVote.winners[0].extraInfo || ''}}/>
+                        extraInfo: 
+                        // curVote.winners[0].extraInfo || 
+                        ''}}/>
                         }
                     </div>
                         
