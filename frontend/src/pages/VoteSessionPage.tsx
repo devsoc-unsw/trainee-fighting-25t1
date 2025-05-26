@@ -124,7 +124,7 @@ export default function VoteSessionPage({ name }: OrganiserInput) {
           setButtonText("Start Session")
           return;
         case (1):
-          setHeaderText("X Amount of people have joined");
+          setHeaderText("Running voting session");
           setButtonText("Stop Vote Session")
 
           return;

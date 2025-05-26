@@ -123,14 +123,14 @@ export default function ViewVotingSessionsPage() {
                     disabled={loading}
                   />
 
-                  <SmallButton
+                  {/* <SmallButton
                     buttonType="bin"
                     onClick={e => {
                       e.stopPropagation();
                       handleDeletion(session.id);
                     }}
                     disabled={loading}
-                  />
+                  /> */}
 
                 </div>
               </WideButton>
