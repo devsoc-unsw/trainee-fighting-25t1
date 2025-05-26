@@ -135,6 +135,42 @@
     ],
     "sessionCode": "y0m78"
   },
+  "879669756": {
+    "id": 879669756,
+    "authUserId": "e41d4eed57c791d36e02cdd2bb8291cef40982dc7d78152772ee0c001071e498",
+    "name": "a",
+    "description": "a",
+    "images": [],
+    "location": "a",
+    "date_time_start": "2014-10-02T02:00:00.000Z",
+    "date_time_end": "2014-10-02T02:00:00.000Z",
+    "requires_zid": true,
+    "questions": [
+      {
+        "id": 258764496,
+        "title": "Yes or NO",
+        "candidates": [
+          {
+            "name": "Yes",
+            "description": "",
+            "image": "",
+            "candidateIndex": 514313415
+          },
+          {
+            "name": "No",
+            "description": "",
+            "image": "",
+            "candidateIndex": 799575924
+          }
+        ],
+        "questionType": "preferential",
+        "ballot": []
+      }
+    ],
+    "electionState": 1,
+    "voters": [],
+    "sessionCode": "z2f5c"
+  },
   "891531194": {
     "id": 891531194,
     "authUserId": "a9962b2edc56fc6a5dc4f39fbb1f7276ea0a9688ec3c840322e069c8df1128b9",

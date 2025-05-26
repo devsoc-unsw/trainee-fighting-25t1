@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
-
     /* Projects */
     // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
     // "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
@@ -9,9 +8,8 @@
     // "disableSourceOfProjectReferenceRedirect": true,  /* Disable preferring source files instead of declaration files when referencing composite projects. */
     // "disableSolutionSearching": true,                 /* Opt a project out of multi-project reference checking when editing. */
     // "disableReferencedProjectLoad": true,             /* Reduce the number of projects loaded automatically by TypeScript. */
-
     /* Language and Environment */
-    "target": "ES2020",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ES2020", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     // "jsx": "preserve",                                /* Specify what JSX code is generated. */
     // "libReplacement": true,                           /* Enable lib replacement. */
@@ -24,21 +22,20 @@
     // "noLib": true,                                    /* Disable including any library files, including the default lib.d.ts. */
     // "useDefineForClassFields": true,                  /* Emit ECMAScript-standard-compliant class fields. */
     // "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
-
     /* Modules */
-    "module": "commonjs",                                /* Specify what module code is generated. */
-    "baseUrl": "./",                                     /* Specify the base directory to resolve non-relative module names. */
+    "module": "commonjs", /* Specify what module code is generated. */
+    "baseUrl": "./", /* Specify the base directory to resolve non-relative module names. */
     "paths": {
-      "shared/*": ["../../shared/*"]
-    },                                                   /* Specify a set of entries that re-map imports to additional lookup locations. */
-    "outDir": "./dist",                                  /* Specify an output folder for all emitted files. */
-    "rootDir": "../",                                  /* Specify the root folder within your source files. */
-
+      "shared/*": [
+        "../../shared/*"
+      ]
+    }, /* Specify a set of entries that re-map imports to additional lookup locations. */
+    "outDir": "./dist", /* Specify an output folder for all emitted files. */
+    "rootDir": "../", /* Specify the root folder within your source files. */
     /* JavaScript Support */
     // "allowJs": true,                                  /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */
     // "checkJs": true,                                  /* Enable error reporting in type-checked JavaScript files. */
     // "maxNodeModuleJsDepth": 1,                        /* Specify the maximum folder depth used for checking JavaScript files from 'node_modules'. Only applicable with 'allowJs'. */
-
     /* Emit */
     // "declaration": true,                              /* Generate .d.ts files from TypeScript and JavaScript files. */
     // "declarationMap": true,                           /* Create sourcemaps for d.ts files. */
@@ -60,13 +57,11 @@
     // "noEmitOnError": true,                            /* Don't emit if there are any type errors. */
     // "preserveConstEnums": true,                       /* Do not erase const enums. */
     // "declarationDir": "./",                           /* Output directory for declaration files. */
-
     /* Interop Constraints */
-    "esModuleInterop": true,                             /* Emit extra JS for better CommonJS interop. */
-    "forceConsistentCasingInFileNames": true,            /* Ensure imports match exact casing. */
-
+    "esModuleInterop": true, /* Emit extra JS for better CommonJS interop. */
+    "forceConsistentCasingInFileNames": true, /* Ensure imports match exact casing. */
     /* Type Checking */
-    "strict": true,                                      /* Enable all strict type-checking options. */
+    "strict": true, /* Enable all strict type-checking options. */
     // "noImplicitAny": true,                            /* Error on expressions with implicit 'any'. */
     // "strictNullChecks": true,                         /* Check for null and undefined. */
     // "strictFunctionTypes": true,                      /* Ensure functions match in parameters and return type. */
@@ -86,10 +81,15 @@
     // "noPropertyAccessFromIndexSignature": true,       /* Require use of index accessors. */
     // "allowUnusedLabels": true,                        /* Allow unused labels. */
     // "allowUnreachableCode": true,                     /* Allow unreachable code. */
-
     /* Completeness */
-    "skipLibCheck": true                                 /* Don't type check declaration files. */
+    "skipLibCheck": true /* Don't type check declaration files. */
   },
-  "include": ["src", "tests"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src",
+    "tests",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
