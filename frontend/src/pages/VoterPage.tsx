@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router'; 
+import { useNavigate } from 'react-router';
 import StyledBackground from "../components/background/StyledBackground";
 import AuthBox from "../components/containers/AuthBox";
 export default function VoterPage() {
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkSession = async () => {
@@ -22,7 +22,7 @@ export default function VoterPage() {
                         }),
                 });
                 if (response.ok) {
-                    navigate('/voter/join'); 
+                    navigate('/voter/join');
                     return;
                 }
             }
@@ -38,7 +38,7 @@ export default function VoterPage() {
     }
 
     return (
-        <StyledBackground className='main'>
+        <StyledBackground className='main flex flex-col justify-center items-center md:items-start md:justify-start'>
             <AuthBox user='voter' />
         </StyledBackground>
     );
