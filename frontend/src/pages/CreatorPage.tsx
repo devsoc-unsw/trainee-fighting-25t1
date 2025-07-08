@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 export default function CreatorPage() {
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkSession = async () => {
@@ -23,7 +23,7 @@ export default function CreatorPage() {
                         }),
                 });
                 if (response.ok) {
-                    navigate('/creator/view-voting-sessions'); 
+                    navigate('/creator/view-voting-sessions');
                     return;
                 }
             }
@@ -38,7 +38,7 @@ export default function CreatorPage() {
         return <div>Loading...</div>;
     }
     return (
-        <StyledBackground className='main'>
+        <StyledBackground className='main flex flex-col justify-center items-center md:items-start md:justify-start'>
             <AuthBox user={"creator"} />
         </StyledBackground>
     )
