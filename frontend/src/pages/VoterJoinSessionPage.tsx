@@ -74,6 +74,7 @@ export default function VoterJoinSessionPage() { // once voter has logged in
         <img className="h-[40px]" src={logoutIcon}></img>
       </button>
       <VotingSessionBox onClick={onClick} setInput={setInput} />
+
     </StyledBackground >
   );
 }
