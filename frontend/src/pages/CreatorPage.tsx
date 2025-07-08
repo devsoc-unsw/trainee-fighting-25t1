@@ -7,6 +7,10 @@ export default function CreatorPage() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    const goBack = () => {
+        navigate('/');
+    }
+
     useEffect(() => {
         const checkSession = async () => {
             const sessionId = localStorage.getItem('user-session-id');
@@ -39,6 +43,9 @@ export default function CreatorPage() {
     }
     return (
         <StyledBackground className='main flex flex-col justify-center items-center md:items-start md:justify-start'>
+            <button className="hover:cursor-pointer text-white p-4 text-2xl absolute top-2 left-4 z-10" onClick={goBack}>
+                ←
+            </button>
             <AuthBox user={"creator"} />
         </StyledBackground>
     )

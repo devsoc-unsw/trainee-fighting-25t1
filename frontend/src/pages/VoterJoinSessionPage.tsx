@@ -1,7 +1,5 @@
 import { useState } from "react";
 import StyledBackground from "../components/background/StyledBackground";
-import AuthInput from "../components/inputs/AuthInput";
-import ThinGradientButton from "../components/buttons/ThinGradientButton";
 import logoutIcon from "../assets/svg/logout.svg";
 import { useNavigate } from "react-router";
 import VotingSessionBox from "../components/containers/VotingSessionBox";
