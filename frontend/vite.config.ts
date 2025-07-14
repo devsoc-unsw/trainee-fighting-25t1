@@ -9,6 +9,7 @@ export default defineConfig({
     react(),
     svgr(),
     tailwindcss(),
+
   ],
   server: {
     proxy: {
@@ -18,5 +19,4 @@ export default defineConfig({
       },
     },
   },
-  base: '/'
 })
