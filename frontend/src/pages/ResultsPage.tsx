@@ -4,6 +4,11 @@ import Heading from "../components/buttons/Heading";
 import WinnerPane from "../components/buttons/WinnerPane";
 import { useEffect, useRef, useState } from "react";
 import { Election, Question} from "../../../shared/interfaces";
+import Carousel from 'react-bootstrap/Carousel';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 
 export default function ResultsPage() {
 
@@ -347,59 +352,89 @@ function calculatePreferentialWinner(question: Question): Results {
         navigate('/creator/view-voting-sessions')
     }
 
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
+
+
+    
+
     return (
-        <StyledBackground className='main'>
+        <StyledBackground className='main r w-full'>
 
             {voteResults !== null && <div className="
-                flex flex-col overflow-y-auto no-scrollbar gap-[1.5em] 
+                flex flex-col  no-scrollbar gap-[1.5em] 
                 h-[100vh]
-                pt-[0rem]
-                p-[6rem]
+
             ">
                 <button className="hover:cursor-pointer text-white p-4 text-2xl absolute top-2 left-4 z-10" onClick={goBack}>
                     ←
                 </button>
                 <Heading text={`${voteTitle} Results`} />
 
-                {/* {voteResults.winners.map((winner, index) => (
-                    <WinnerPane key={index} winner={winner}>
-                    </WinnerPane>
-                ))} */}
-                {voteResults && voteResults.map((curVote, index) => {
-                    return (
-                    // <div>
-                    //     {curVote.winners.length > 0 &&  
-                    //     <WinnerPane key={index} winner={
-                    //     {name: curVote.winners[0].name, 
-                    //     position: curVote.winners[0].position,
-                    //     extraInfo: curVote.winners[0].extraInfo || ''}}/>
-                    //     }
-                    // </div>
-                       <div style={{ whiteSpace: 'pre-line' }}> {curVote.winners.length > 0 ? (
-                        <WinnerPane
-                            key={index}
-                            winner={{
-                            name: curVote.winners[0].name,
-                            position: curVote.winners[0].position,
-                            extraInfo: curVote.winners[0].extraInfo
-                            }}
-                        />
-                        ) : (
-                        <WinnerPane
-                            key={index}
-                            winner={{
-                            name: "No winner",
-                            position: curVote.voteName,
-                            extraInfo: "No candidate received a majority or no votes were cast."
-                            }}
-                        />
-                        )}
-                    </div>
-                        
-                    )
-                })}
+      
+         <Carousel activeIndex={index} onSelect={handleSelect} interval={null}>
+            {voteResults.map((curVote, idx) => (
+                <Carousel.Item key={idx}>
+                <div className="flex justify-center items-center min-h-[500px] ">
+                    {curVote.winners.length > 0 ? (
+                    <WinnerPane
+                        winner={{
+                        name: curVote.winners[0].name,
+                        position: curVote.winners[0].position,
+                        extraInfo: curVote.winners[0].extraInfo,
+                        }}
+                    />
+                    ) : (
+                    <WinnerPane
+                        winner={{
+                        name: "No winner",
+                        position: curVote.voteName,
+                        extraInfo:
+                            "No candidate received a majority or no votes were cast.",
+                        }}
+                    />
+                    )}
+                </div>
+                </Carousel.Item>
+            ))}
+            </Carousel>
+
+
                 
             </div>}
+            <style>
+    {`
+    
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 3rem !important;
+  height: 3rem !important;
+  background: none !important;
+  border: none !important;
+  z-index: 10 !important;
+  transition: none !important; /* prevents Bootstrap transition effect */
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.carousel-control-prev {
+  left: -5rem !important;
+}
+
+.carousel-control-next {
+  right: -5rem !important;
+}
+
+
+
+    `}
+  </style>
             {voteResults === null && <div className="
                 flex flex-col overflow-y-auto no-scrollbar gap-[1.5em] 
                 h-[100vh]
