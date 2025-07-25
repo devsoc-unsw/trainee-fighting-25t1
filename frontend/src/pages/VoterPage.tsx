@@ -38,7 +38,11 @@ export default function VoterPage() {
     }, [navigate]);
     //ADd loading component here
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <StyledBackground className='main justify-center items-center'>
+                <div>Loading...</div>
+            </StyledBackground>
+        );
     }
 
     return (

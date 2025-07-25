@@ -193,14 +193,18 @@ export const getResult = async (electionId: string) => {
         const questions = election.questions;
 
         for (const q of questions) {
+            if (q.ballot.length === 0) {
+                resultMap[q.title] = "No winner";
+                continue;
+            }
             const winnerId = calculatePreferentialVotingWinner(q.ballot);
             if (winnerId === -1) {
-                resultMap[q.title] = "None";
+                resultMap[q.title] = "No winner";
+                continue;
             }
             const winnerObj = q.candidates.find(c => c.candidateIndex === winnerId);
-            if (winnerObj) {
-                resultMap[q.title] = winnerObj.name;
-            }
+     
+            resultMap[q.title] = winnerObj?.name || "No winner";
         }
 
 
