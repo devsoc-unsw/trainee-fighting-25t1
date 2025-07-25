@@ -73,9 +73,13 @@ function calculatePreferentialWinner(question: Question): Results {
     });
     
     // Create first preference summary for extra info
+    // const firstPrefSummary = candidates
+    //     .map((candidate, index) => `${candidate.name}: ${firstPreferenceCounts.get(index) || 0}`)
+    //     .join(', ');
     const firstPrefSummary = candidates
-        .map((candidate, index) => `${candidate.name}: ${firstPreferenceCounts.get(index) || 0}`)
-        .join(', ');
+    .map((candidate, index) => `${candidate.name}: ${firstPreferenceCounts.get(index) || 0}`)
+    .join('\n');
+
     
     // Start IRV algorithm
     const activeCandidateIndices = new Set<number>();
@@ -363,13 +367,33 @@ function calculatePreferentialWinner(question: Question): Results {
                 ))} */}
                 {voteResults && voteResults.map((curVote, index) => {
                     return (
-                    <div>
-                        {curVote.winners.length > 0 &&  
-                        <WinnerPane key={index} winner={
-                        {name: curVote.winners[0].name, 
-                        position: curVote.winners[0].position,
-                        extraInfo: curVote.winners[0].extraInfo || ''}}/>
-                        }
+                    // <div>
+                    //     {curVote.winners.length > 0 &&  
+                    //     <WinnerPane key={index} winner={
+                    //     {name: curVote.winners[0].name, 
+                    //     position: curVote.winners[0].position,
+                    //     extraInfo: curVote.winners[0].extraInfo || ''}}/>
+                    //     }
+                    // </div>
+                       <div style={{ whiteSpace: 'pre-line' }}> {curVote.winners.length > 0 ? (
+                        <WinnerPane
+                            key={index}
+                            winner={{
+                            name: curVote.winners[0].name,
+                            position: curVote.winners[0].position,
+                            extraInfo: curVote.winners[0].extraInfo
+                            }}
+                        />
+                        ) : (
+                        <WinnerPane
+                            key={index}
+                            winner={{
+                            name: "No winner",
+                            position: curVote.voteName,
+                            extraInfo: "No candidate received a majority or no votes were cast."
+                            }}
+                        />
+                        )}
                     </div>
                         
                     )
